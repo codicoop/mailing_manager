@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-01 18:44+0200\n"
+"PO-Revision-Date: 2020-04-01 18:49+0200\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: admin.py:38
+msgid "Preview and test"
+msgstr "Previsualització i prova"
+
+#: admin.py:42
+msgid "Preview"
+msgstr "Previsualització"
+
+#: admin.py:55
+msgid "Test email successfully sent."
+msgstr "Correu de prova enviat correctament"
+
+#: admin.py:58
+msgid "Error: all fields are required."
+msgstr "Error: tots els camps son obligatoris."
+
+#: models.py:8
+msgid "creation"
+msgstr "creació"
+
+#: models.py:9
+msgid "identifier"
+msgstr "identificador"
+
+#: models.py:10
+msgid "subject"
+msgstr "assumpte"
+
+#: models.py:11
+msgid "body"
+msgstr "cos"
+
+#: models.py:12
+msgid "default template path"
+msgstr "ruta de la plantilla per defecte"
+
+#: templates/admin/templatemail_preview.html:9
+msgid "Home"
+msgstr "Inici"
+
+#: templates/admin/templatemail_preview.html:18
+msgid "Mail template preview"
+msgstr "Previsualització de la plantilla de correu"
+
+#: templates/admin/templatemail_preview.html:19
+msgid ""
+"The words in uppercase are the ones that the app will replace by the real "
+"values."
+msgstr ""
+"Les paraules que aparèixen en majúscula son les que l'aplicació substituirà "
+"pels valors reals."
+
+#: templates/admin/templatemail_preview.html:20
+msgid ""
+"In example, it may say \"Hello NAME\", when a real for a person called Maria "
+"is generated, it\\"
+msgstr ""
+"Per exemple potser  diu \"Hola NOM\", al generar un e-mail real que vagi "
+"destinat a la Maria, apareixerà \"Hola Maria\"."
+
+#: templates/admin/templatemail_preview.html:21
+msgid ""
+"If it says \"Since STARTING_DATE\", at the real e-mail will (in example) "
+"appear \"Since 30/01/2020\", etc."
+msgstr ""
+"Si diu \"Des del DATA_INICI\", al mail real apareixerà (per exemple) \"Des "
+"del 13/01/2020\", etc."
+
+#: templates/admin/templatemail_preview.html:41
+msgid "Subject strings"
+msgstr "Textos de l'assumpte"
+
+#: templates/admin/templatemail_preview.html:59
+msgid "Subject does not contain variable strings."
+msgstr "L'assumpte no conté textos variables."
+
+#: templates/admin/templatemail_preview.html:62
+msgid "Message body strings"
+msgstr "Textos del cos del missatge"
+
+#: templates/admin/templatemail_preview.html:80
+msgid "Message body does not contain variable strings."
+msgstr "El cos del  missatge no conté textos variables."
+
+#: templates/admin/templatemail_preview.html:83
+msgid "Sending options"
+msgstr "Opcions de l'enviament"
+
+#: templates/admin/templatemail_preview.html:88
+msgid "Test recipient"
+msgstr "Destinatari de la prova"
+
+#: templates/admin/templatemail_preview.html:101
+msgid "Send immediately"
+msgstr "Enviament immediat"
+
+#: templates/admin/templatemail_preview.html:109
+msgid "Send test e-mail"
+msgstr "Enviar correu de prova "
+
+#: templates/admin/templatemail_preview.html:110
+msgid "No, take me back"
+msgstr "No, torna enrera"
