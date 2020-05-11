@@ -31,7 +31,7 @@ and the SMTP configuration according to Django's documentation.
 
 ### for mail_queue_handler.py
 
-The MailQueueHandler class extends MailHandler to use [https://github.com/dstegelman/django-mail-queue](django_mail_queue) 
+The MailQueueHandler class extends MailHandler to use [https://github.com/Privex/django-mail-queue](django_mail_queue) 
 to send the emails asynchronously and to keep a log of everything sent.
 If you don't need these features just stick to MailHandler.
 
