@@ -17,7 +17,7 @@
 <div id="grp-content-container">
   <h1>{% trans 'Mail template preview' %}</h1>
   <p><em>{% trans 'The words in uppercase are the ones that the app will replace by the real values.' %}<br>
-    {% trans 'In example, it may say "Hello NAME", when a real for a person called Maria is generated, it\'ll say "Hello Maria".' %}<br>
+    {% blocktrans %}In example, it may say "Hello NAME", when a real for a person called Maria is generated, it'll say "Hello Maria".{% endblocktrans %}<br>
     {% trans 'If it says "Since STARTING_DATE", at the real e-mail will (in example) appear "Since 30/01/2020", etc.' %}</em></p>
 
   <p style="margin-bottom: 10px; margin-top: 10px; border: 1px solid black; width: 990px; padding: 10px 0px 10px 10px">{{ rendered_subject }}</p>
