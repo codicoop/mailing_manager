@@ -115,6 +115,9 @@ Then you just need to specify the template when setting up the sending:
 
     mail.template = 'path/to/your/template.html'
     
+> **_NOTE ABOUT CONTEXT PREPROCESSORS:_**  Passing along `request` is needed in order to use context from the 
+> preprocessors in the template. When setting up the mailing manager object, you can set `MailingManagerInstance.request.`
+>   
 ## Previewing and sending test emails
 
 Create a Mail record using the admin panel and you'll see the link to Preview at the last column.

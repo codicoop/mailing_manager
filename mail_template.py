@@ -12,6 +12,7 @@ class MailTemplate:
     mail = None
     template = None
     template_extra_context = None
+    request = None
 
     def __init__(self, text_identifier):
         self.mail = Mail.objects.get(text_identifier=text_identifier)
@@ -59,7 +60,7 @@ class MailTemplate:
             'mail_content': content,
             **(template_extra_context or {}),
         }
-        return mark_safe(render_to_string(self._get_template_path(), context_data))
+        return render_to_string(self._get_template_path(), context_data, request=self.request)
 
     def _validate_subject_strings(self):
         missing_strings = []

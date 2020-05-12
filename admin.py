@@ -71,6 +71,7 @@ class MailAdmin(admin.ModelAdmin):
         mail = Mail.objects.get(id=_id)
         template_mail = MailQueueHandler(mail.text_identifier)
         template_mail.body_strings = template_mail.mail.body_strings_dict
+        template_mail.request = request
         return HttpResponse(template_mail.get_rendered_html_body())
 
     def _send_preview(self, form, template_mail):
