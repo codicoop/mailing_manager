@@ -81,6 +81,9 @@ class MailAdmin(admin.ModelAdmin):
         for string in template_mail.mail.body_strings:
             template_mail.body_strings.update({string: form.cleaned_data[f"body_{string}"]})
 
-        template_mail.from_address = form.cleaned_data['options_to']
+        # From address might come filled with settings.MAILING_MANAGER_DEFAULT_FROM.
+        if not template_mail.from_address:
+            template_mail.from_address = form.cleaned_data['options_to']
+
         template_mail.to = form.cleaned_data['options_to']
         template_mail.send(form.cleaned_data['options_now'])

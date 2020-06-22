@@ -13,6 +13,11 @@ class MailHandler(MailTemplate):
     bcc = None
     debug_bcc = None
 
+    def __init__(self, text_identifier):
+        super(MailHandler, self).__init__(text_identifier)
+        if hasattr(settings, 'MAILING_MANAGER_DEFAULT_FROM'):
+            self.from_address = settings.MAILING_MANAGER_DEFAULT_FROM
+
     def send(self):
         self._validate_values()
         mail_object = self._setup_email()
