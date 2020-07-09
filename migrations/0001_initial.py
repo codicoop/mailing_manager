@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+       ('mailqueue', '0007_auto_20200318_0651'),
     ]
 
     operations = [
