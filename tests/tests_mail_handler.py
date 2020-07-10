@@ -8,6 +8,14 @@ from ..mail_handler import MailHandler
 
 class MailHandlerTest(TestCase):
 
+    # __init__()
+    def test___init__(self):
+        MailFactory()
+        with self.settings(MAILING_MANAGER_DEFAULT_FROM='from@example.com'):
+            mailhandler = MailHandler('IDENTIFIER')
+
+        self.assertEqual(mailhandler.from_address, 'from@example.com')
+
     # send()
     def test_send(self):
         MailFactory()
@@ -36,7 +44,8 @@ class MailHandlerTest(TestCase):
     # _validate_values()
     def test__validate_values(self):
         MailFactory()
-        mailhandler = MailHandler('IDENTIFIER')
+        with self.settings(MAILING_MANAGER_DEFAULT_FROM=None):
+            mailhandler = MailHandler('IDENTIFIER')
 
         with self.assertRaisesMessage(TypeError, "TemplateMail.to should be a string or an iterable."):
             mailhandler._validate_values()
