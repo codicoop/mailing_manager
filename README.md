@@ -22,6 +22,14 @@ subject and body, using bracket strings for the {variables}.
 as explained below.
 3. Fill the object parameters and .send() it.
 
+Settings:
+Instead of specifying the `.from_address` every time, use the `MAILING_MANAGER_DEFAULT_FROM` setting.
+
+That way you make sure that this from address is defaulted, **which also affect the sample e-mails 
+that you can send from the template's Preview in admin**.
+Otherwise, these previews from_address are going to be the same as the `.to` recipient, which will cause it to
+get filtered by spam filters if the from address is not the same one that you are logging in in SMTP.
+
 ## Dependencies
 
 ### for mail_handler.py
