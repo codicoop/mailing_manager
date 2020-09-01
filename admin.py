@@ -4,6 +4,7 @@ from django.urls import path, reverse
 from django.utils.safestring import mark_safe
 from django.template.response import TemplateResponse
 from django.utils.translation import gettext as _
+from django.views.decorators.clickjacking import xframe_options_sameorigin
 
 from .models import Mail
 from .mail_queue_handler import MailQueueHandler
@@ -67,6 +68,7 @@ class MailAdmin(admin.ModelAdmin):
         return TemplateResponse(
             request, 'admin/templatemail_preview.html', context)
 
+    @xframe_options_sameorigin
     def preview_iframe_view(self, request, _id):
         mail = Mail.objects.get(id=_id)
         template_mail = MailQueueHandler(mail.text_identifier)
