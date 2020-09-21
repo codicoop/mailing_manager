@@ -5,6 +5,11 @@ from django.template.defaultfilters import upper
 
 
 class Mail(models.Model):
+    class Meta:
+        verbose_name = _("mail template")
+        verbose_name_plural = _("mail templates")
+
+
     created = models.DateTimeField(_("creation"), auto_now_add=True)
     text_identifier = models.CharField(_("identifier"), unique=True, max_length=100)
     subject = models.CharField(_("subject"), max_length=250)
