@@ -10,10 +10,12 @@ class MailQueueHandlerTest(TestCase):
     def setUpTestData(cls):
         cls.Mail = MailFactory._meta.model
 
-    def create_mail(self,
-                    text_identifier="IDENTIFIER",
-                    subject="Subject {subject_string_1} and {subject_string_2}",
-                    body="Body: {body_string_1} and {body_string_2}"):
+    def create_mail(
+        self,
+        text_identifier="IDENTIFIER",
+        subject="Subject {subject_string_1} and {subject_string_2}",
+        body="Body: {body_string_1} and {body_string_2}"
+    ):
         self.mail, created = Mail.objects.get_or_create(
             text_identifier=text_identifier,
             subject=subject,
@@ -53,9 +55,9 @@ class MailQueueHandlerTest(TestCase):
     Static content in the template.
   </p>
   </body>
-</html>"""
+</html>"""  # noqa
         self.assertEqual(mailtemplate.get_rendered_html_body(), expected_html)
-        # TODO: Specify a template and test that it returns it inside the template.
+        # TODO: Specify a template and test that it returns it inside the tmplt
 
     # get_plain_text_body()
     def test_get_plain_text_body(self):
@@ -66,16 +68,16 @@ class MailQueueHandlerTest(TestCase):
         mailtemplate.template = 'tests/mail.html'
         expected_text = """
 
-  
-    
-  
-  
+
+
+
+
       Body: first body string and second body string
-  
-  
+
+
     Static content in the template.
-  
-  
+
+
 """
         self.assertEqual(mailtemplate.get_plain_text_body(), expected_text)
 
@@ -95,8 +97,11 @@ class MailQueueHandlerTest(TestCase):
     def test__validate_subject_strings(self):
         MailFactory()
         mailtemplate = MailTemplate('IDENTIFIER')
-        expected_error = "TemplateMail is trying to send the e-mail IDENTIFIER, but these strings are missing from " \
-                         "subject_strings: subject_string_1, subject_string_2."
+        expected_error = (
+            "TemplateMail is trying to send the e-mail IDENTIFIER, but these "
+            "strings are missing from subject_strings: subject_string_1, "
+            "subject_string_2."
+        )
         with self.assertRaisesMessage(ValueError, expected_error):
             mailtemplate._validate_subject_strings()
 
@@ -104,8 +109,11 @@ class MailQueueHandlerTest(TestCase):
     def test__validate_body_strings(self):
         MailFactory()
         mailtemplate = MailTemplate('IDENTIFIER')
-        expected_error = "TemplateMail is trying to send the e-mail IDENTIFIER, but these strings are missing from " \
-                         "body_strings: body_string_1, body_string_2."
+        expected_error = (
+            "TemplateMail is trying to send the e-mail IDENTIFIER, but these"
+            " strings are missing from body_strings: body_string_1, "
+            "body_string_2."
+        )
         with self.assertRaisesMessage(ValueError, expected_error):
             mailtemplate._validate_body_strings()
 
@@ -117,4 +125,7 @@ class MailQueueHandlerTest(TestCase):
             'second': 'IPSUM',
         }
         expected_text = "Text with f strings: LOREM and IPSUM"
-        self.assertEqual(MailTemplate._get_formatted_text(input_strings, input_text), expected_text)
+        self.assertEqual(
+            MailTemplate._get_formatted_text(input_strings, input_text),
+            expected_text
+        )

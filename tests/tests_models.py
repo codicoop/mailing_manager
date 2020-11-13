@@ -18,7 +18,7 @@ class MailQueueHandlerTest(TestCase):
         self.assertSequenceEqual(body_strings, mail.body_strings)
 
         subject_strings_dict = {'subject_string_1': '[SUBJECT_STRING_1]',
-                               'subject_string_2': '[SUBJECT_STRING_2]', }
+                                'subject_string_2': '[SUBJECT_STRING_2]', }
         self.assertEqual(subject_strings_dict, mail.subject_strings_dict)
 
         body_strings_dict = {'body_string_1': '[BODY_STRING_1]',

@@ -19,23 +19,28 @@ class MailTemplate:
 
     def get_rendered_subject(self):
         self._validate_subject_strings()
-        return self._get_formatted_text(strings=self.subject_strings, text=self.mail.subject)
+        return self._get_formatted_text(
+            strings=self.subject_strings, text=self.mail.subject)
 
     def get_rendered_html_body(self):
         self._validate_body_strings()
-        txt = self._get_formatted_text(strings=self.body_strings, text=self.mail.body)
+        txt = self._get_formatted_text(
+            strings=self.body_strings, text=self.mail.body)
         if self._get_template_path() is not None:
             return self._apply_template(txt, self.template_extra_context)
         return mark_safe(txt)
 
     def get_plain_text_body(self):
         """
-        Many email templates will incude the <style> block at header, even if the styles had been inlined, causing the
+        Many email templates will incude the <style> block at header, even if
+        the styles had been inlined, causing the
         plain text version to contain all the styles if you only strip_tags().
 
         :return: String without the HTML tags and any <styles> block removed.
         """
-        text = re.sub('<style>.*</style>', '', self.get_rendered_html_body(), flags=re.S)
+        text = re.sub(
+            '<style>.*</style>', '', self.get_rendered_html_body(), flags=re.S
+        )
         text = strip_tags(text)
         return text
 
@@ -48,9 +53,11 @@ class MailTemplate:
 
     def _apply_template(self, content, template_extra_context=None):
         """
-        Takes the specified self._get_template_path() (if any) and renders it, passing along the self.template_extra_content
+        Takes the specified self._get_template_path() (if any) and renders it,
+        passing along the self.template_extra_content
         to the template.
-        Using render_to_string here to access to full features of Django templating.
+        Using render_to_string here to access to full features of Django
+        templating.
         :return: str with the rendered HTML.
         """
         if not self._get_template_path():
@@ -60,7 +67,9 @@ class MailTemplate:
             'mail_content': content,
             **(template_extra_context or {}),
         }
-        return render_to_string(self._get_template_path(), context_data, request=self.request)
+        return render_to_string(
+            self._get_template_path(), context_data, request=self.request
+        )
 
     def _validate_subject_strings(self):
         missing_strings = []
@@ -68,8 +77,11 @@ class MailTemplate:
             if string not in self.subject_strings:
                 missing_strings.append(string)
         if len(missing_strings) > 0:
-            raise ValueError(f"TemplateMail is trying to send the e-mail {self.mail.text_identifier}, but these strings"
-                             f" are missing from subject_strings: {', '.join(missing_strings)}.")
+            raise ValueError(
+                f"TemplateMail is trying to send the e-mail "
+                f"{self.mail.text_identifier}, but these strings are missing "
+                f"from subject_strings: {', '.join(missing_strings)}."
+            )
 
     def _validate_body_strings(self):
         missing_strings = []
@@ -77,8 +89,11 @@ class MailTemplate:
             if string not in self.body_strings:
                 missing_strings.append(string)
         if len(missing_strings) > 0:
-            raise ValueError(f"TemplateMail is trying to send the e-mail {self.mail.text_identifier}, but these strings"
-                             f" are missing from body_strings: {', '.join(missing_strings)}.")
+            raise ValueError(
+                f"TemplateMail is trying to send the e-mail "
+                f"{self.mail.text_identifier}, but these stringsare missing "
+                f"from body_strings: {', '.join(missing_strings)}."
+            )
 
     @staticmethod
     def _get_formatted_text(strings, text):

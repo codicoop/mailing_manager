@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.admin import AdminSite
 from django.contrib.auth import get_user_model
 from django.test import TestCase, RequestFactory
@@ -41,15 +40,19 @@ class TemplateMailPreviewFormTest(TestCase):
     # preview_field()
     def test_preview_field(self):
         admin = MailAdmin(Mail, self.site)
-        compare_to = '<a href="/admin/mailing_manager/mail/8/preview/">Previsualització i prova</a>'
+        compare_to = (
+            '<a href="/admin/mailing_manager/mail/8/preview/">'
+            'Previsualització i prova</a>'
+        )
         self.assertEqual(admin.preview_field(self.mail), compare_to)
 
-        # Now instantiating the model without loading any record to test obj.id = None:
+        # Now instantiating the model without loading any record to
+        # test obj.id = None:
         compare_to = '-'
         self.assertEqual(admin.preview_field(Mail()), compare_to)
 
     # get_rendered_html_body()
-    # url: f"/admin/mailing_manager/mail/{mailtemplate.mail.id}/preview_iframe/"
+    # url: /admin/mailing_manager/mail/{mailtemplate.mail.id}/preview_iframe/
     def test_preview_iframe_view(self):
         MailFactory()
         mailtemplate = MailTemplate('IDENTIFIER')
@@ -69,9 +72,9 @@ class TemplateMailPreviewFormTest(TestCase):
     Static content in the template.
   </p>
   </body>
-</html>"""
+</html>"""  # noqa
         request_factory = RequestFactory()
-        request = request_factory.get(f"/admin/")
+        request = request_factory.get("/admin/")
         request.user = MockSuperUser()
         admin = MailAdmin(Mail, self.site)
         response = admin.preview_iframe_view(request, mailtemplate.mail.id)
@@ -84,10 +87,13 @@ class TemplateMailPreviewFormTest(TestCase):
         mailtemplate.mail.default_template_path = 'tests/mail.html'
         mailtemplate.mail.save()
         request_factory = RequestFactory()
-        request = request_factory.get(f"/admin/")
+        request = request_factory.get("/admin/")
         request.user = MockSuperUser()
-        admin = MailAdmin(Mail, self.site)
+        # admin = MailAdmin(Mail, self.site)
         # response = admin.preview_view(request, mailtemplate.mail.id)
-        response = self.client.get(f"/admin/mailing_manager/mail/{mailtemplate.mail.id}/preview_iframe/")
+        response = self.client.get(
+            f"/admin/mailing_manager/mail/{mailtemplate.mail.id}"
+            f"/preview_iframe/"
+        )
         print(response.content)
         self.assertContains(response.content, "test")

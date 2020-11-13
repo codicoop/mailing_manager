@@ -9,12 +9,13 @@ class Mail(models.Model):
         verbose_name = _("mail template")
         verbose_name_plural = _("mail templates")
 
-
     created = models.DateTimeField(_("creation"), auto_now_add=True)
-    text_identifier = models.CharField(_("identifier"), unique=True, max_length=100)
+    text_identifier = models.CharField(
+        _("identifier"), unique=True, max_length=100)
     subject = models.CharField(_("subject"), max_length=250)
     body = models.TextField(_("body"))
-    default_template_path = models.CharField(_("default template path"), max_length=250, null=True, blank=True)
+    default_template_path = models.CharField(
+        _("default template path"), max_length=250, null=True, blank=True)
 
     @property
     def subject_strings(self):

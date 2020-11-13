@@ -13,7 +13,9 @@ from .forms import TemplateMailPreviewForm
 
 @admin.register(Mail)
 class MailAdmin(admin.ModelAdmin):
-    list_display = ('text_identifier', 'subject', 'default_template_path', 'preview_field')
+    list_display = (
+        'text_identifier', 'subject', 'default_template_path', 'preview_field'
+    )
     readonly_fields = ('created', 'subject_strings', 'body_strings', )
 
     def get_urls(self):
@@ -43,10 +45,12 @@ class MailAdmin(admin.ModelAdmin):
     preview_field.short_description = _("Preview")
 
     def preview_view(self, request, _id):
-        # Inspired by: https://gist.github.com/rsarai/d475c766871f40e52b8b4d1b12dedea2
+        # Inspired by:
+        # https://gist.github.com/rsarai/d475c766871f40e52b8b4d1b12dedea2
         mail = Mail.objects.get(id=_id)
         template_mail = MailQueueHandler(mail.text_identifier)
-        # Only setting up the subject because the body is handled by the iframe view:
+        # Only setting up the subject because the body is handled by the iframe
+        # view:
         template_mail.subject_strings = template_mail.mail.subject_strings_dict
 
         if request.method == 'POST':
@@ -78,12 +82,17 @@ class MailAdmin(admin.ModelAdmin):
 
     def _send_preview(self, form, template_mail):
         for string in template_mail.mail.subject_strings:
-            template_mail.subject_strings.update({string: form.cleaned_data[f"subject_{string}"]})
+            template_mail.subject_strings.update(
+                {string: form.cleaned_data[f"subject_{string}"]}
+            )
 
         for string in template_mail.mail.body_strings:
-            template_mail.body_strings.update({string: form.cleaned_data[f"body_{string}"]})
+            template_mail.body_strings.update(
+                {string: form.cleaned_data[f"body_{string}"]}
+            )
 
-        # From address might come filled with settings.MAILING_MANAGER_DEFAULT_FROM.
+        # From address might come filled with
+        # settings.MAILING_MANAGER_DEFAULT_FROM.
         if not template_mail.from_address:
             template_mail.from_address = form.cleaned_data['options_to']
 

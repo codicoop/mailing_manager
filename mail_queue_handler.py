@@ -11,8 +11,8 @@ class MailQueueHandler(MailHandler):
     def send(self, now=False):
         """
         Adding 'now' and auto-pruning functionality.
-        :param now: In case you are using a mail_handler like mail_queue, you might want the option to send it
-        immediately instead of queuing it.
+        :param now: In case you are using a mail_handler like mail_queue, you
+        might want the option to send it immediately instead of queuing it.
         :return: Nothing
         """
         self.now = now
@@ -27,12 +27,14 @@ class MailQueueHandler(MailHandler):
         :return: Nothing
         """
         if isinstance(self.prune_older_than, int):
-            offset = self.prune_older_than * 24  # mail_queue expects the offset in hours.
+            # mail_queue expects the offset in hours.
+            offset = self.prune_older_than * 24
             MailerMessage.objects.clear_sent_messages(offset)
 
     def _send(self, mail_object):
         """
-        :param mail_object: In this case is a mail_queue object, so doing a .save() adds it to sending queue.
+        :param mail_object: In this case is a mail_queue object, so doing a
+        .save() adds it to sending queue.
         :return: Nothing
         """
         mail_object.save()
@@ -57,7 +59,8 @@ class MailQueueHandler(MailHandler):
     @staticmethod
     def _get_formatted_recipients(addresses):
         """
-        Mail Queue needs it to be a string, instead of a list or tuple like EmailMultiAlternatives.
+        Mail Queue needs it to be a string, instead of a list or tuple like
+        EmailMultiAlternatives.
         :param addresses: string or iterable containing e-mails.
         :return: String with all the e-mails separated by comma.
         """

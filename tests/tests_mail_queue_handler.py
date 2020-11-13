@@ -27,15 +27,21 @@ class MailQueueHandlerTest(TestCase):
     def test_templatemail_send(self):
         self.templatemail_send()
 
-        # As this send() doesn't send anything but stores it in a model, we directly check mail_queue model:
+        # As this send() doesn't send anything but stores it in a model, we
+        # directly check mail_queue model:
         queued_mail = MailerMessage.objects.get(app='IDENTIFIER')
         self.assertFalse(queued_mail.sent)
-        self.assertEqual(queued_mail.subject, "Subject first string and second string")
-        self.assertEqual(queued_mail.content, "Body: first body string and second body string")
+        self.assertEqual(
+            queued_mail.subject, "Subject first string and second string")
+        self.assertEqual(
+            queued_mail.content,
+            "Body: first body string and second body string"
+        )
         self.assertEqual(queued_mail.app, 'IDENTIFIER')
         self.assertEqual(queued_mail.to_address, "a@example.com")
         self.assertEqual(queued_mail.cc_address, "b@example.com")
-        self.assertEqual(queued_mail.bcc_address, "c@example.com, d@example.com")
+        self.assertEqual(
+            queued_mail.bcc_address, "c@example.com, d@example.com")
         self.assertEqual(queued_mail.from_address, "from@example.com")
 
     def create_mail_queue_old_sent_mail(self, days=31):
@@ -54,14 +60,16 @@ class MailQueueHandlerTest(TestCase):
         self.assertTrue(isinstance(created, MailerMessage))
         self.templatemail_send()
 
-        # Default pruning antiquity is 30 days, this is 31 days old. After send(), should not exist:
+        # Default pruning antiquity is 30 days, this is 31 days old. After
+        # send(), should not exist:
         with self.assertRaises(MailerMessage.DoesNotExist):
             created = MailerMessage.objects.get(subject='Old mail subject')
 
         self.create_mail_queue_old_sent_mail(29)
         self.templatemail_send()
         created = MailerMessage.objects.get(subject='Old mail subject')
-        # Default pruning antiquity is 30 days, this is 29 days old. After send(), should still be there:
+        # Default pruning antiquity is 30 days, this is 29 days old. After
+        # send(), should still be there:
         self.assertTrue(isinstance(created, MailerMessage))
 
     # _send()
@@ -75,7 +83,8 @@ class MailQueueHandlerTest(TestCase):
 
     # _setup_email()
     def test__setup_email(self):
-        # I guess coverage is not missing it because it's tested when testing send()?
+        # I guess coverage is not missing it because it's tested when testing
+        # send()?
         pass
 
     # _get_formatted_recipients()

@@ -33,7 +33,8 @@ class MailHandler(MailTemplate):
 
     def _validate_values(self):
         if not isinstance(self.to, str) and not isinstance(self.to, Iterable):
-            raise TypeError("TemplateMail.to should be a string or an iterable.")
+            raise TypeError(
+                "TemplateMail.to should be a string or an iterable.")
 
         if not isinstance(self.from_address, str):
             raise TypeError("TemplateMail.from_address needs to be a string.")
@@ -76,4 +77,6 @@ class MailHandler(MailTemplate):
         elif isinstance(string_or_iterable, Iterable):
             return string_or_iterable
         else:
-            raise TypeError(f"Value '{str(string_or_iterable)} should be a string or an iterable.")
+            raise TypeError(
+                f"Value '{str(string_or_iterable)} should be a string or an "
+                f"iterable.")
