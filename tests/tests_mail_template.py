@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from ..models import Mail
-from ..mail_template import MailTemplate
+from mailing_manager.models import Mail
+from mailing_manager.mail_template import MailTemplate
 from .factories.mail import MailFactory
 
 

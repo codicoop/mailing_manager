@@ -1,6 +1,6 @@
 import factory
 
-from ...models import Mail
+from mailing_manager.models import Mail
 
 
 class MailFactory(factory.DjangoModelFactory):

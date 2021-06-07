@@ -3,9 +3,9 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase, RequestFactory
 
 from .factories.mail import MailFactory
-from ..admin import MailAdmin
-from ..models import Mail
-from ..mail_template import MailTemplate
+from mailing_manager.admin import MailAdmin
+from mailing_manager.models import Mail
+from mailing_manager.mail_template import MailTemplate
 
 User = get_user_model()
 

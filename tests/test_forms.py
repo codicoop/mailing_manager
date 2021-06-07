@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django import forms
 
-from ..forms import TemplateMailPreviewForm
-from ..mail_template import MailTemplate
+from mailing_manager.forms import TemplateMailPreviewForm
+from mailing_manager.mail_template import MailTemplate
 from .factories.mail import MailFactory
 
 

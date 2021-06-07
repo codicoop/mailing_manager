@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from mailqueue.models import MailerMessage
 
-from ..mail_queue_handler import MailQueueHandler
+from mailing_manager.mail_queue_handler import MailQueueHandler
 from .factories.mail import MailFactory
 
 

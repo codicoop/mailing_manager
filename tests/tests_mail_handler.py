@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core import mail
 
 from .factories.mail import MailFactory
-from ..mail_handler import MailHandler
+from mailing_manager.mail_handler import MailHandler
 
 
 class MailHandlerTest(TestCase):
