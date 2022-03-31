@@ -20,7 +20,8 @@ class MailTemplate:
     def get_rendered_subject(self):
         self._validate_subject_strings()
         return self._get_formatted_text(
-            strings=self.subject_strings, text=self.mail.subject)
+            strings=self.subject_strings, text=self.mail.subject
+        )[:250]
 
     def get_rendered_html_body(self):
         self._validate_body_strings()
