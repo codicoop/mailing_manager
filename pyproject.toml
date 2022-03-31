@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mailing_manager"
-version = "0.1.0"
+version = "0.1.1"
 description = "Basic mail template managing integrated with admin panel and django-mail-queue."
 authors = ["Codi Cooperatiu <hola@codi.coop>"]
 license = "BSD"
